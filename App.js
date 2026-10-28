@@ -1,5 +1,8 @@
-import React, { UseState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView} from 'react-native';
+
+import OrderSummary from './OrderSummary';
+import MenuItem from './MenuItem';
 
 const DAFTAR_MENU =[
   { id: '1', nama: 'Kopi Susu Catnip', harga: 20000 },
@@ -8,7 +11,7 @@ const DAFTAR_MENU =[
 ];
 
 export default function App() {
-  const [totalPesanan, setTotalPesanan] = UseState(0);
+  const [totalPesanan, setTotalPesanan] = useState(0);
 
   const tambahanPesanan =  () =>{
     setTotalPesanan(totalPesanan + 1);
@@ -18,12 +21,12 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.title}>Cat Cafe</Text>
       <Text style={styles.subtitle}>Pesan makanan dan minuman anda!</Text>
-      <OrderSumary totalCount={totalPesanan} />
+      <OrderSummary totalCount={totalPesanan} />
       <Text style= {styles.heading}>Daftar Menu</Text>
 
       <ScrollView>
         {DAFTAR_MENU.map((item) => (
-          <MenuItem key={item.id} nama={item.nama} harga={item.harga} onAddToOrder={tambahanPesanan} />
+          <MenuItem key={item.id} nama={item.nama} harga={item.harga} onTambahPesanan={tambahanPesanan} />
         ))}
       </ScrollView>
     </View>
@@ -34,7 +37,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backGroundColor: '#FFF0F5',
+    backgroundColor: '#FFF0F5',
     padding: 20,
     paddingTop: 50,
   },
